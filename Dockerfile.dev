@@ -1,0 +1,24 @@
+# Specify a base image
+FROM node:alpine
+
+# Install some dependencies
+WORKDIR /app
+
+COPY package.json .
+
+RUN apk add --update curl
+
+#RUN curl -sL https://deb.nodesource.com/setup_8.x | sh -
+
+RUN apk add --update nodejs
+
+RUN apk add --update npm
+
+RUN npm install -g eslint
+
+RUN npm install
+
+COPY . .
+
+# Default Command
+CMD ["npm","run","start"]
